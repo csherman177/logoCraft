@@ -1,8 +1,8 @@
 // Inquirer (node package manager) import
 
 const inquirer = require('inquirer');
-const fs  = require ('fs')
-const shapes = require('./shapes')
+const fs  = require ('fs');
+const shapes = require('./lib/shapes');
 
 // add the svg.js file
 //add the shapes.js file
@@ -10,21 +10,25 @@ const shapes = require('./shapes')
 
 
 const questions = [
+    // empty string to hold letters
     {
         type: 'input',
         message: 'What 3 letters would you like to appear on LOGO?',
         name: 'text'
     },
+    // how do I link the colors to the project.
     {
         type: 'input',
         message: 'Which color would you like your text to be?',
         name: 'txtcolor'
     },    
+      // how do I link the colors to the project.
     {
         type: 'input',
         message: 'Which color would you like your shape to be?',
         name: 'color'
     },
+    // what do I map the shapes to?
     {
         type: 'list',
         name: 'shape',
@@ -34,21 +38,6 @@ const questions = [
     },
 ];
 
-// const choices; {
-//     if (answers.shape === "circle") {
-//         choices = New ShapeChoices();
-//         //insert SVG String
-//     }
-//     if (answers.shape === "triangle") {
-//         choices = New ShapeChoices();
-//         //insert SVG String
-//     }
-//     if (answers.shape === "square") {
-//         choices = New ShapeChoices();
-//         //insert SVG String
-//     }
-
-// }
 
 function writeToFile(fileName,answers) {
     fs.writeFile(fileName,data,(err) => {
