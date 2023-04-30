@@ -16,19 +16,19 @@ const questions = [
         message: 'What 3 letters would you like to appear on LOGO?',
         name: 'text'
     },
-    // how do I link the colors to the project.
+    // how do I link the colors to the project?
     {
         type: 'input',
         message: 'Which color would you like your text to be?',
         name: 'txtcolor'
     },    
-      // how do I link the colors to the project.
+      // how do I link the colors to the project?
     {
         type: 'input',
         message: 'Which color would you like your shape to be?',
         name: 'color'
     },
-    // what do I map the shapes to?
+    // what do I map the shapes too?
     {
         type: 'list',
         name: 'shape',
@@ -50,7 +50,7 @@ function writeToFile(fileName,answers) {
 
 function init() {
     inquirer.createPromptModule(questions)
-    .them((answers) => {
+    .then((answers) => {
         console.log(answers)
         writeToFile('logo.svg',markDown(answers));
     })
