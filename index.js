@@ -2,11 +2,8 @@
 
 const inquirer = require('inquirer');
 const fs  = require ('fs');
-const shapes = require('./lib/shapes');
-
-// add the svg.js file
-//add the shapes.js file
-
+const shapes = require('./lib/shapes.js');
+const { SVG, setShape } = require('./lib/svg.js');
 
 
 const questions = [
@@ -39,20 +36,29 @@ const questions = [
 ];
 
 
-function writeToFile(fileName,answers) {
-    fs.writeFile(fileName,data,(err) => {
-        if(err){
-            console.log('error')
-        }
-        else console.log('success');
-    });
+function writeToFile(fileName, data) {
+  if (typeof data === 'undefined') {
+    console.log('Error: data is undefined');
+    return;
+  }
+  const bufferData = Buffer.from(data);
+  fs.writeFile(fileName, bufferData, (err) => {
+    if (err) {
+      console.log('Error writing to file:', err);
+    } else {
+      console.log('File saved:', fileName);
+    }
+  });
 }
 
 function init() {
-    inquirer.createPromptModule(questions)
-    .then((answers) => {
-        console.log(answers)
-        writeToFile('logo.svg',markDown(answers));
-    })
+  inquirer.prompt(questions).then((data) => {
+    console.log(data);
+    const svg = new SVG();
+    const svgElement = svg.setShape(data);
+    const svgString = svg.render(svgElement);
+    writeToFile('logo.svg', svgString);
+  });
 }
 
+init();
